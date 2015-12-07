@@ -1,0 +1,93 @@
+Question 1:
+Simple PageRank, Facebook Dataset
+Time elapsed: 40.02 min
+
+Backedges PageRank, Facebook Dataset
+Time elapsed: 44.66 min
+
+Simple PageRank, Enron Dataset
+Time elapsed: 48.84 min
+
+Backedges PageRank, Enron Dataset
+Time elapsed: 50.95 min
+
+
+
+
+Question 2:
+Simple PageRank, Enron Dataset
+Time elapsed: 13.15 min
+size: 4049333 bytes(3.9 MB)
+size/runtime = 307934.06844 bytes/min
+
+Simple PageRank, Facebook Dataset
+Time elapsed: 10.62 min
+size: 854362 bytes(834 KB)
+size/runtime = 80448.399 bytes/min
+
+Yes
+
+
+
+Question 3:
+5 instances
+Backedges PageRank, Enron Dataset
+Time elapsed: 50.95 min
+
+Backedges PageRank, Enron Dataset
+10 instances
+Time elapsed: 17.47 min
+
+size: 4049333 bytes(3.9 MB)
+
+
+The spark parallelizes my work very well since the time of 5 / time of 10 = 3. So the speedup is
+almost 3 times faster.
+
+Strong scaling: time varies with number of processors for a fixed total problem size.
+the total sizes of there two are same so the speedup of strong scaling is 3 times faster.
+
+Weak scaling: time varies with number of processors for a fixed problem size per processor.
+3.9MB/5 = 0.78MB/processor
+3.9MB/10 = 0.39MB/processor
+0.39 * 2 = 0.78 so we should increase number of processors of 5 instances by 2 times.
+Thus both of these two have 10 processors now.
+So the speed up is also 50.95/17.47 = 3 times.
+
+So based one weak and strong scaling, we conclude spark parallelizes our work very well.
+
+
+Question 4:
+It was fastest at a repartition count of 20. Decreasing the repartition count would be slower
+as it would not take full advantage of each machine, while increasing the repartition count would
+be slower as it would put to much stress on each machine.
+
+Question 5:
+Part 4 Time:
+40.02 + 44.66 + 48.84 + 50.95 = 184.47
+
+Part 5 Time with 1 Repartition:
+17.84 + 17.36 + 3.88 + 3.75 = 42.83
+
+Part 5 Time with 2 Repartitions:
+7.75 + 7.5 + 1.86 + 1.8 = 18.91
+
+Part 5 Time with 5 Repartitions:
+2.24 + 2.25 + .83 + .8 = 6.12
+
+Part 5 Time with 10 Repartitions:
+1.01 + .99 + .53 + .61 = 3.14
+
+Part 5 Time with 20 Repartitions:
+.72 + .77 + .56 + .56 = 2.61
+
+Part 5 Time with 100 Repartitions:
+1.56 + 1.42 + 1.26 + 1.46 = 5.7
+
+Part 5 Time with 500 Repartitions:
+10.62 + 16.94 + 13.51 + 17.47 = 58.54
+
+Total Cost:
+(.0161/60) * [6 * 184.47 + 11 * (42.83 + 18.91 + 6.12 + 3.14 + 2.61 + 5.7 + 58.54)] = $0.704
+
+ 
